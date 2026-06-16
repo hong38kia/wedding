@@ -152,6 +152,21 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,.35);
   animation:fade 1.2s ease forwards 1.2s;
 }
+.music-btn{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:20;
+  min-height:38px;
+  padding:0 16px;
+  border-radius:999px;
+  border:1px solid rgba(233,201,130,.55);
+  background:rgba(5,12,24,.78);
+  color:#fff;
+  font:600 12px/1.2 Arial,sans-serif;
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+}
 .petal{
   position:absolute;
   z-index:3;
@@ -240,7 +255,43 @@ body{
     <div class="monogram">林 & 何</div>
   </div>
 </div>
+<audio id="bgMusic" loop preload="auto">
+  <source src="wedding-march.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="startMusic()" id="musicBtn">
+  ♫ Play Music
+</button>
 <script>
+var musicStarted = false;
+
+function startMusic() {
+  var music = document.getElementById("bgMusic");
+  var btn = document.getElementById("musicBtn");
+
+  music.volume = 0.45;
+
+  music.play().then(function () {
+    musicStarted = true;
+    btn.innerHTML = "♫ Music On";
+  }).catch(function () {
+    btn.innerHTML = "♫ Play Music";
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  var music = document.getElementById("bgMusic");
+
+  music.volume = 0.45;
+
+  music.play().then(function () {
+    musicStarted = true;
+    document.getElementById("musicBtn").innerHTML = "♫ Music On";
+  }).catch(function () {
+    document.getElementById("musicBtn").innerHTML = "♫ Play Music";
+  });
+});
+
 function openRSVP() {
   var name = prompt("请输入您的姓名 / Please enter your name:");
   if (!name) return;
