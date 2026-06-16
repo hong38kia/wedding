@@ -151,9 +151,9 @@ h1{margin:0;font-size:38px;line-height:1;color:#fff8ea;font-weight:400}
       </div>
 
       <div class="actions">
-        <a class="btn" href="mailto:example@example.com?subject=Wedding RSVP">RSVP</a>
-        <a class="btn alt" href="https://maps.google.com/?q=The Grand Ballroom New York">Map</a>
-      </div>
+  <a class="btn" href="#" onclick="openRSVP()">RSVP</a>
+  <a class="btn alt" href="https://maps.google.com/?q=The Grand Ballroom New York">Map</a>
+</div>
 
       <p class="footer">Designed By Dennis Ho(Brother)</p>
     </section>
@@ -167,3 +167,26 @@ h1{margin:0;font-size:38px;line-height:1;color:#fff8ea;font-weight:400}
 </div>
 </body>
 </html>
+<script>
+function openRSVP() {
+  var name = prompt("请输入您的姓名 / Please enter your name:");
+  if (!name) return;
+
+  var phone = prompt("请输入您的联系方式 / Please enter your contact number:");
+  if (!phone) return;
+
+  var pax = prompt("几个人出席？ / How many guests will attend?");
+  if (!pax) return;
+
+  var message =
+    "Wedding RSVP%0A%0A" +
+    "Name: " + encodeURIComponent(name) + "%0A" +
+    "Contact: " + encodeURIComponent(phone) + "%0A" +
+    "Pax: " + encodeURIComponent(pax) + "%0A%0A" +
+    "Thank you.";
+
+  var whatsappNumber = "60123456789";
+
+  window.open("https://wa.me/" + whatsappNumber + "?text=" + message, "_blank");
+}
+</script>
