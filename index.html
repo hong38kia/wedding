@@ -9,7 +9,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Lim Kok Ming & Ho Pei Ching Wedding Invitation">
-<meta property="og:description" content="Join us for an dinner, dancing, and celebration.">
+<meta property="og:description" content="Join us for an evening of dinner, dancing, and celebration.">
 <meta property="og:url" content="https://hong38kia.github.io/wedding/">
 <meta property="og:image" content="https://hong38kia.github.io/wedding/preview.jpg">
 <meta property="og:image:secure_url" content="https://hong38kia.github.io/wedding/preview.jpg">
@@ -21,39 +21,94 @@
 <meta name="twitter:title" content="Lim Kok Ming (林国洺) & Ho Pei Ching (何沛静) Wedding Invitation">
 <meta name="twitter:description" content="Join us for an evening of dinner, dancing, and celebration.">
 <meta name="twitter:image" content="https://hong38kia.github.io/wedding/preview.jpg">
+
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;min-height:100vh;overflow:hidden;display:grid;place-items:center;
-  font-family:Georgia,"Times New Roman",serif;color:#fff;background:#07111f;
+  margin:0;
+  min-height:100vh;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  font-family:Georgia,"Times New Roman",serif;
+  color:#fff;
+  background:#07111f;
 }
+
 .scene{
-  position:relative;width:min(430px,100vw);height:100vh;overflow:hidden;
+  position:relative;
+  width:min(430px,100vw);
+  height:100vh;
+  overflow:hidden;
   background:
     radial-gradient(circle at 50% 18%,rgba(255,244,220,.35),transparent 30%),
     linear-gradient(180deg,#07111f,#0f2742 48%,#050914);
 }
+
 .scene:before{
-  content:"";position:absolute;inset:-20%;
+  content:"";
+  position:absolute;
+  inset:-20%;
   background:radial-gradient(circle,rgba(255,255,255,.22) 0 2px,transparent 3px);
-  background-size:70px 70px;animation:sparkle 12s linear infinite;opacity:.5;
+  background-size:70px 70px;
+  animation:sparkle 12s linear infinite;
+  opacity:.5;
 }
+
 .scene:after{
-  content:"";position:absolute;inset:0;
+  content:"";
+  position:absolute;
+  inset:0;
   background:linear-gradient(110deg,transparent 20%,rgba(255,245,220,.18) 48%,transparent 70%);
-  transform:translateX(-120%);animation:shine 5s ease-in-out infinite 4s;
+  transform:translateX(-120%);
+  animation:shine 5s ease-in-out infinite 4s;
 }
+
 .invite{
-  position:relative;z-index:2;height:100%;padding:34px 26px 24px;
-  display:flex;flex-direction:column;justify-content:space-between;text-align:center;
-  opacity:0;transform:scale(.96);animation:show 1.2s ease forwards 2.6s;
+  position:relative;
+  z-index:2;
+  height:100%;
+  padding:30px 24px 22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-align:center;
+  opacity:0;
+  transform:scale(.96);
+  animation:show 1.2s ease forwards 2.6s;
 }
+
 .kicker{
   font-size:12px;
   letter-spacing:.28em;
   color:#e9c982;
   margin-bottom:10px;
 }
+
+h1{
+  margin:0;
+  font-size:36px;
+  line-height:1;
+  color:#fff8ea;
+  font-weight:400;
+}
+
+.names{
+  margin:12px 0 10px;
+  font-size:24px;
+  line-height:1.18;
+  color:#fff;
+  font-weight:400;
+}
+
+.amp{
+  display:block;
+  font-size:20px;
+  color:#e9c982;
+  line-height:1.3;
+}
+
 .photo{
   width:154px;
   height:190px;
@@ -75,6 +130,7 @@ body{
   border-radius:75px 75px 8px 8px;
   border:2px solid rgba(255,255,255,.85);
 }
+
 .note{
   margin:0 auto;
   max-width:330px;
@@ -86,20 +142,38 @@ body{
   font-size:13px;
   line-height:1.5;
 }
-.details{display:grid;gap:8px;margin-top:12px}
+
+.details{
+  display:grid;
+  gap:8px;
+  margin-top:12px;
+}
+
 .detail{
   padding:10px 12px;
   background:rgba(255,255,255,.07);
   border-top:1px solid rgba(233,201,130,.45);
 }
+
 .label{
   font-size:11px;
   letter-spacing:.22em;
   color:#e9c982;
   margin-bottom:4px;
 }
-.value{font-size:15px;line-height:1.45}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+
+.value{
+  font-size:15px;
+  line-height:1.45;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:12px;
+}
+
 .btn{
   min-height:40px;
   display:grid;
@@ -110,13 +184,43 @@ body{
   color:#07111f;
   background:linear-gradient(135deg,#fff4d6,#d5ad61);
 }
+
 .btn.alt{
   color:#fff;
   border:1px solid rgba(233,201,130,.55);
   background:rgba(255,255,255,.08);
 }
-.footer{margin:10px 0 0;font:12px/1.5 Arial,sans-serif;color:rgba(255,255,255,.75)}
-.doors{position:absolute;inset:0;z-index:8;perspective:1200px;animation:gone .1s linear forwards 3s}
+
+.footer{
+  margin:10px 0 0;
+  font:12px/1.5 Arial,sans-serif;
+  color:rgba(255,255,255,.75);
+}
+
+.music-btn{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:20;
+  min-height:38px;
+  padding:0 16px;
+  border-radius:999px;
+  border:1px solid rgba(233,201,130,.55);
+  background:rgba(5,12,24,.78);
+  color:#fff;
+  font:600 12px/1.2 Arial,sans-serif;
+  cursor:pointer;
+  backdrop-filter:blur(8px);
+}
+
+.doors{
+  position:absolute;
+  inset:0;
+  z-index:8;
+  perspective:1200px;
+  animation:gone .1s linear forwards 3s;
+}
+
 .door{
   position:absolute;
   top:0;
@@ -125,6 +229,7 @@ body{
   background:linear-gradient(180deg,#132b46,#07111f);
   box-shadow:inset 0 0 55px rgba(0,0,0,.45);
 }
+
 .door:before{
   content:"";
   position:absolute;
@@ -133,8 +238,19 @@ body{
   border-radius:12px;
   box-shadow:inset 0 0 0 8px rgba(255,255,255,.04);
 }
-.left{left:0;transform-origin:left center;animation:openL 2.5s cubic-bezier(.7,0,.2,1) forwards .45s}
-.right{right:0;transform-origin:right center;animation:openR 2.5s cubic-bezier(.7,0,.2,1) forwards .45s}
+
+.left{
+  left:0;
+  transform-origin:left center;
+  animation:openL 2.5s cubic-bezier(.7,0,.2,1) forwards .45s;
+}
+
+.right{
+  right:0;
+  transform-origin:right center;
+  animation:openR 2.5s cubic-bezier(.7,0,.2,1) forwards .45s;
+}
+
 .monogram{
   position:absolute;
   z-index:9;
@@ -152,21 +268,7 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,.35);
   animation:fade 1.2s ease forwards 1.2s;
 }
-.music-btn{
-  position:fixed;
-  right:16px;
-  bottom:16px;
-  z-index:20;
-  min-height:38px;
-  padding:0 16px;
-  border-radius:999px;
-  border:1px solid rgba(233,201,130,.55);
-  background:rgba(5,12,24,.78);
-  color:#fff;
-  font:600 12px/1.2 Arial,sans-serif;
-  cursor:pointer;
-  backdrop-filter:blur(8px);
-}
+
 .petal{
   position:absolute;
   z-index:3;
@@ -177,10 +279,12 @@ body{
   background:rgba(255,248,232,.82);
   animation:fall linear infinite;
 }
+
 .petal:nth-child(1){left:12%;animation-duration:8s;animation-delay:3s}
 .petal:nth-child(2){left:34%;animation-duration:9s;animation-delay:3.6s}
 .petal:nth-child(3){left:58%;animation-duration:7s;animation-delay:4s}
 .petal:nth-child(4){left:82%;animation-duration:10s;animation-delay:3.3s}
+
 @keyframes openL{to{transform:rotateY(-105deg)}}
 @keyframes openR{to{transform:rotateY(105deg)}}
 @keyframes gone{to{visibility:hidden;pointer-events:none}}
@@ -188,64 +292,78 @@ body{
 @keyframes show{to{opacity:1;transform:scale(1)}}
 @keyframes sparkle{to{transform:translate3d(70px,70px,0)}}
 @keyframes shine{50%,100%{transform:translateX(120%)}}
+
 @keyframes fall{
   0%{transform:translateY(-30px) rotate(0);opacity:0}
   15%{opacity:1}
   100%{transform:translateY(100vh) translateX(60px) rotate(260deg);opacity:0}
 }
+
 @media(max-height:720px){
-  .invite{padding:24px 22px 18px}
-  h1{
-  margin:0;
-  font-size:38px;
-  line-height:1;
-  color:#fff8ea;
-  font-weight:400;
-}
-  .note{font-size:13px;line-height:1.4;padding:10px 12px}
-  .detail{padding:8px 10px}.value{font-size:14px}.btn{min-height:36px}
-  .amp{display:block;font-size:20px;color:#e9c982;}
+  .invite{padding:22px 20px 16px}
+  h1{font-size:31px}
+  .names{font-size:20px}
+  .photo{width:128px;height:156px;margin:8px auto 8px}
+  .note{font-size:12px;line-height:1.38;padding:9px 11px}
+  .detail{padding:8px 10px}
+  .value{font-size:14px}
+  .btn{min-height:36px}
+  .music-btn{right:12px;bottom:12px;min-height:34px;padding:0 13px}
 }
 </style>
 </head>
+
 <body>
 <div class="scene">
-  <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+  <span class="petal"></span>
+  <span class="petal"></span>
+  <span class="petal"></span>
+  <span class="petal"></span>
 
   <main class="invite">
     <section>
       <div class="kicker">WEDDING INVITATION</div>
+
       <h1>You're Invited</h1>
-      <div class="names">Lim Kok Ming (林国洺)<span class="amp"><br>&<br></span>Ho Pei Ching (何沛静)</div>
+
+      <div class="names">
+        Lim Kok Ming (林国洺)
+        <span class="amp">&</span>
+        Ho Pei Ching (何沛静)
+      </div>
 
       <div class="photo">
         <img src="https://hong38kia.github.io/wedding/1.jpeg" alt="Wedding photo">
       </div>
 
       <p class="note">
-  Together with our families, we sincerely invite you to attend our wedding dinner. Your presence will add even more joy and blessings to this special evening.<br><br>
-  谨偕双方家人，诚挚邀请您出席我们的婚宴。您的莅临将为这个特别的夜晚增添更多喜悦与祝福。
-</p>
+        Together with our families, we sincerely invite you to attend our wedding dinner. Your presence will add even more joy and blessings to this special evening.<br><br>
+        谨偕双方家人，诚挚邀请您出席我们的婚宴。您的莅临将为这个特别的夜晚增添更多喜悦与祝福。
+      </p>
     </section>
 
     <section>
       <div class="details">
         <div class="detail">
-          <div class="label">DATE(日期)</div>
-          <div class="value">October 10, 2026 · 7:00 PM <br> 10/10/2026 七点正 星期六 </div>
+          <div class="label">DATE 日期</div>
+          <div class="value">
+            October 10, 2026 · 7:00 PM<br>
+            2026年10月10日 · 星期六 · 晚上7点正
+          </div>
         </div>
+
         <div class="detail">
-          <div class="label">VENUE</div>
+          <div class="label">VENUE 地点</div>
           <div class="value">Swanie Residence Homestay</div>
         </div>
       </div>
 
       <div class="actions">
-  <a class="btn" href="#" onclick="openRSVP()">Confirm</a>
-  <a class="btn alt" href="https://maps.app.goo.gl/5wbQzR6vhtCZRwVi9">Google Maps</a>
-</div>
+        <a class="btn" href="#" onclick="openRSVP(); return false;">Confirm</a>
+        <a class="btn alt" href="https://maps.app.goo.gl/5wbQzR6vhtCZRwVi9" target="_blank">Google Maps</a>
+      </div>
 
-      <p class="footer">Designed By Dennis Ho(Brother)</p>
+      <p class="footer">Designed By Dennis Ho (Brother)</p>
     </section>
   </main>
 
@@ -255,13 +373,15 @@ body{
     <div class="monogram">林 & 何</div>
   </div>
 </div>
-<audio id="bgMusic" loop preload="auto">
+
+<audio id="bgMusic" loop preload="auto" playsinline>
   <source src="wedding-march.mp3" type="audio/mpeg">
 </audio>
 
-<button class="music-btn" onclick="startMusic()" id="musicBtn">
+<button class="music-btn" onclick="toggleMusic()" id="musicBtn">
   ♫ Play Music
 </button>
+
 <script>
 var musicStarted = false;
 
@@ -269,27 +389,48 @@ function startMusic() {
   var music = document.getElementById("bgMusic");
   var btn = document.getElementById("musicBtn");
 
+  if (!music || !btn) return;
+
   music.volume = 0.45;
 
   music.play().then(function () {
     musicStarted = true;
     btn.innerHTML = "♫ Music On";
   }).catch(function () {
+    musicStarted = false;
     btn.innerHTML = "♫ Play Music";
   });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function toggleMusic() {
   var music = document.getElementById("bgMusic");
+  var btn = document.getElementById("musicBtn");
 
-  music.volume = 0.45;
+  if (!music || !btn) return;
 
-  music.play().then(function () {
-    musicStarted = true;
-    document.getElementById("musicBtn").innerHTML = "♫ Music On";
-  }).catch(function () {
-    document.getElementById("musicBtn").innerHTML = "♫ Play Music";
-  });
+  if (music.paused) {
+    startMusic();
+  } else {
+    music.pause();
+    musicStarted = false;
+    btn.innerHTML = "♫ Play Music";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  startMusic();
+
+  document.body.addEventListener("click", function () {
+    if (!musicStarted) {
+      startMusic();
+    }
+  }, { once:true });
+
+  document.body.addEventListener("touchstart", function () {
+    if (!musicStarted) {
+      startMusic();
+    }
+  }, { once:true });
 });
 
 function openRSVP() {
