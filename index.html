@@ -320,10 +320,36 @@ h1{
   .btn{min-height:36px}
   .music-btn{right:12px;bottom:max(18px,calc(16px + env(safe-area-inset-bottom)));min-height:34px;padding:0 13px}
 }
+.start-screen{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(180deg,#fff1f5,#f5dfc4);
+}
+
+.start-screen button{
+  border:0;
+  border-radius:999px;
+  padding:16px 34px;
+  background:linear-gradient(135deg,#fff8e7,#d8b46a);
+  color:#6b3f35;
+  font:700 18px/1.3 Arial,sans-serif;
+  box-shadow:0 12px 30px rgba(120,70,60,.22);
+}
+
+.start-screen button span{
+  font-size:14px;
+  font-weight:500;
+}
 </style>
 </head>
 
 <body>
+  <div id="startScreen" class="start-screen">
+  <button onclick="enterInvitation()">Open Invitation<br><span>打开请柬</span></button>
+</div>
 <div class="scene">
   <span class="petal"></span>
   <span class="petal"></span>
@@ -395,26 +421,12 @@ h1{
 
 <script>
 var musicStarted = false;
-var musicReadyError = false;
-
-function getEls() {
-  return {
-    music: document.getElementById("bgMusic"),
-    btn: document.getElementById("musicBtn")
-  };
-}
-
-function setMusicButton(text) {
-  var btn = document.getElementById("musicBtn");
-  if (btn) btn.innerHTML = text;
-}
 
 function startMusic() {
-  var els = getEls();
-  var music = els.music;
-  var btn = els.btn;
+  var music = document.getElementById("bgMusic");
+  var btn = document.getElementById("musicBtn");
 
-  if (!music || !btn) return;
+  if (!music) return;
 
   music.volume = 0.45;
 
@@ -423,26 +435,28 @@ function startMusic() {
   if (playPromise !== undefined) {
     playPromise.then(function () {
       musicStarted = true;
-      btn.innerHTML = "♫ Music On";
+      if (btn) btn.innerHTML = "♫ Music On";
     }).catch(function (err) {
-      musicStarted = false;
-
-      if (music.error) {
-        btn.innerHTML = "♫ Music File Missing";
-        alert("音乐文件读取不到。请确认 wedding-march.mp3 和这个 HTML 放在同一个文件夹，并一起上传到 GitHub Pages。");
-      } else {
-        btn.innerHTML = "♫ Tap For Music";
-      }
-
       console.log("Music play failed:", err);
+      musicStarted = false;
+      if (btn) btn.innerHTML = "♫ Tap For Music";
     });
   }
 }
 
+function enterInvitation() {
+  var startScreen = document.getElementById("startScreen");
+
+  if (startScreen) {
+    startScreen.style.display = "none";
+  }
+
+  startMusic();
+}
+
 function toggleMusic() {
-  var els = getEls();
-  var music = els.music;
-  var btn = els.btn;
+  var music = document.getElementById("bgMusic");
+  var btn = document.getElementById("musicBtn");
 
   if (!music || !btn) return;
 
