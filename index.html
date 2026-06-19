@@ -384,8 +384,9 @@ h1{
   </div>
 </div>
 
-<audio id="bgMusic" loop preload="auto" playsinline crossorigin="anonymous">
-  <source src="https://www.orangefreesounds.com/wp-content/uploads/2017/04/Mendelssohn-wedding-march.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop preload="auto" playsinline>
+  <source src="wedding-march.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
 </audio>
 
 <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
@@ -394,76 +395,88 @@ h1{
 
 <script>
 var musicStarted = false;
+var musicReadyError = false;
 
-function getMusicElements() {
+function getEls() {
   return {
     music: document.getElementById("bgMusic"),
     btn: document.getElementById("musicBtn")
   };
 }
 
-function updateMusicButton(text) {
+function setMusicButton(text) {
   var btn = document.getElementById("musicBtn");
   if (btn) btn.innerHTML = text;
 }
 
 function startMusic() {
-  var el = getMusicElements();
-  var music = el.music;
+  var els = getEls();
+  var music = els.music;
+  var btn = els.btn;
 
-  if (!music) return;
+  if (!music || !btn) return;
 
   music.volume = 0.45;
-  music.muted = false;
 
   var playPromise = music.play();
 
   if (playPromise !== undefined) {
     playPromise.then(function () {
       musicStarted = true;
-      updateMusicButton("♫ Music On");
-    }).catch(function () {
+      btn.innerHTML = "♫ Music On";
+    }).catch(function (err) {
       musicStarted = false;
-      updateMusicButton("♫ Tap For Music");
+
+      if (music.error) {
+        btn.innerHTML = "♫ Music File Missing";
+        alert("音乐文件读取不到。请确认 wedding-march.mp3 和这个 HTML 放在同一个文件夹，并一起上传到 GitHub Pages。");
+      } else {
+        btn.innerHTML = "♫ Tap For Music";
+      }
+
+      console.log("Music play failed:", err);
     });
   }
 }
 
 function toggleMusic() {
-  var el = getMusicElements();
-  var music = el.music;
+  var els = getEls();
+  var music = els.music;
+  var btn = els.btn;
 
-  if (!music) return;
+  if (!music || !btn) return;
 
   if (music.paused) {
     startMusic();
   } else {
     music.pause();
     musicStarted = false;
-    updateMusicButton("♫ Play Music");
+    btn.innerHTML = "♫ Play Music";
   }
 }
 
-function bindFirstInteractionMusic() {
-  var oncePlay = function () {
-    if (!musicStarted) startMusic();
-  };
+document.addEventListener("DOMContentLoaded", function () {
+  var els = getEls();
+  var music = els.music;
+  var btn = els.btn;
 
-  document.addEventListener("click", oncePlay, { once:true });
-  document.addEventListener("touchstart", oncePlay, { once:true });
-  document.addEventListener("pointerdown", oncePlay, { once:true });
-  document.addEventListener("keydown", oncePlay, { once:true });
-}
+  if (music) {
+    music.addEventListener("error", function () {
+      musicReadyError = true;
+      setMusicButton("♫ Music File Missing");
+      console.log("Audio load error. Check that wedding-march.mp3 is uploaded in the same folder as index.html.");
+    });
+  }
 
-window.addEventListener("load", function () {
   startMusic();
-  bindFirstInteractionMusic();
-});
 
-document.addEventListener("visibilitychange", function () {
-  if (!document.hidden && !musicStarted) {
-    startMusic();
-  }
+  document.body.addEventListener("click", function () {
+    if (!musicStarted) startMusic();
+  }, { once:true });
+
+  document.body.addEventListener("touchstart", function () {
+    if (!musicStarted) startMusic();
+  }, { once:true });
 });
 
 function openRSVP() {
@@ -476,7 +489,6 @@ function openRSVP() {
   var pax = prompt("几个人出席？ / How many guests will attend?");
   if (!pax) return;
 
-  var whatsappNumber = "60125882861"; // Malaysia format: 60 + number, no +, no spaces
   var message =
     "Wedding RSVP\n\n" +
     "Name: " + name + "\n" +
@@ -484,8 +496,10 @@ function openRSVP() {
     "Pax: " + pax + "\n\n" +
     "Thank you.";
 
+  var whatsappNumber = "60125882861";
   var whatsappUrl = "https://api.whatsapp.com/send?phone=" + whatsappNumber + "&text=" + encodeURIComponent(message);
-  window.location.href = whatsappUrl;
+
+  window.open(whatsappUrl, "_blank");
 }
 </script>
 </body>
