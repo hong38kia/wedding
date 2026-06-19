@@ -357,8 +357,8 @@ h1{
         <div class="detail">
           <div class="label">DATE 日期</div>
           <div class="value">
-            October 10, 2026 · 7:00 PM<br>
-            2026年10月10日 · 星期六 · 晚上7点正
+            October 3, 2026 · 7:00 PM<br>
+            2026年10月3日 · 星期六 · 晚上7点正
           </div>
         </div>
 
@@ -384,8 +384,8 @@ h1{
   </div>
 </div>
 
-<audio id="bgMusic" loop preload="auto" playsinline>
-  <source src="wedding-march.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop preload="auto" playsinline crossorigin="anonymous">
+  <source src="https://www.orangefreesounds.com/wp-content/uploads/2017/04/Mendelssohn-wedding-march.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
@@ -395,52 +395,75 @@ h1{
 <script>
 var musicStarted = false;
 
-function startMusic() {
-  var music = document.getElementById("bgMusic");
-  var btn = document.getElementById("musicBtn");
+function getMusicElements() {
+  return {
+    music: document.getElementById("bgMusic"),
+    btn: document.getElementById("musicBtn")
+  };
+}
 
-  if (!music || !btn) return;
+function updateMusicButton(text) {
+  var btn = document.getElementById("musicBtn");
+  if (btn) btn.innerHTML = text;
+}
+
+function startMusic() {
+  var el = getMusicElements();
+  var music = el.music;
+
+  if (!music) return;
 
   music.volume = 0.45;
+  music.muted = false;
 
-  music.play().then(function () {
-    musicStarted = true;
-    btn.innerHTML = "♫ Music On";
-  }).catch(function () {
-    musicStarted = false;
-    btn.innerHTML = "♫ Play Music";
-  });
+  var playPromise = music.play();
+
+  if (playPromise !== undefined) {
+    playPromise.then(function () {
+      musicStarted = true;
+      updateMusicButton("♫ Music On");
+    }).catch(function () {
+      musicStarted = false;
+      updateMusicButton("♫ Tap For Music");
+    });
+  }
 }
 
 function toggleMusic() {
-  var music = document.getElementById("bgMusic");
-  var btn = document.getElementById("musicBtn");
+  var el = getMusicElements();
+  var music = el.music;
 
-  if (!music || !btn) return;
+  if (!music) return;
 
   if (music.paused) {
     startMusic();
   } else {
     music.pause();
     musicStarted = false;
-    btn.innerHTML = "♫ Play Music";
+    updateMusicButton("♫ Play Music");
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function bindFirstInteractionMusic() {
+  var oncePlay = function () {
+    if (!musicStarted) startMusic();
+  };
+
+  document.addEventListener("click", oncePlay, { once:true });
+  document.addEventListener("touchstart", oncePlay, { once:true });
+  document.addEventListener("pointerdown", oncePlay, { once:true });
+  document.addEventListener("keydown", oncePlay, { once:true });
+}
+
+window.addEventListener("load", function () {
   startMusic();
+  bindFirstInteractionMusic();
+});
 
-  document.body.addEventListener("click", function () {
-    if (!musicStarted) {
-      startMusic();
-    }
-  }, { once:true });
-
-  document.body.addEventListener("touchstart", function () {
-    if (!musicStarted) {
-      startMusic();
-    }
-  }, { once:true });
+document.addEventListener("visibilitychange", function () {
+  if (!document.hidden && !musicStarted) {
+    startMusic();
+  }
 });
 
 function openRSVP() {
@@ -455,16 +478,10 @@ function openRSVP() {
 
   var whatsappNumber = "60125882861"; // Malaysia format: 60 + number, no +, no spaces
   var message =
-    "Wedding RSVP
-
-" +
-    "Name: " + name + "
-" +
-    "Contact: " + phone + "
-" +
-    "Pax: " + pax + "
-
-" +
+    "Wedding RSVP\n\n" +
+    "Name: " + name + "\n" +
+    "Contact: " + phone + "\n" +
+    "Pax: " + pax + "\n\n" +
     "Thank you.";
 
   var whatsappUrl = "https://api.whatsapp.com/send?phone=" + whatsappNumber + "&text=" + encodeURIComponent(message);
