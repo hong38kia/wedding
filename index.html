@@ -497,9 +497,30 @@ function openRSVP() {
     "Thank you.";
 
   var whatsappNumber = "60125882861";
-  var whatsappUrl = "https://api.whatsapp.com/send?phone=" + whatsappNumber + "&text=" + encodeURIComponent(message);
+  var encodedText = encodeURIComponent(message);
 
-  window.open(whatsappUrl, "_blank");
+  // 手机优先直接打开 WhatsApp App
+  var appUrl = "whatsapp://send?phone=" + whatsappNumber + "&text=" + encodedText;
+
+  // 如果用户没有安装 WhatsApp，或者电脑浏览器不能打开 App，就 fallback 到 WhatsApp Web
+  var webUrl = "https://web.whatsapp.com/send?phone=" + whatsappNumber + "&text=" + encodedText;
+  var apiUrl = "https://api.whatsapp.com/send?phone=" + whatsappNumber + "&text=" + encodedText;
+
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  var isMobile = /android|iphone|ipad|ipod/i.test(ua);
+
+  if (isMobile) {
+    // 必须用 location.href，window.open 很多手机浏览器会当成弹窗阻挡
+    window.location.href = appUrl;
+
+    // 没装 WhatsApp 才会留在浏览器，然后 1.5 秒后去官方 fallback 页面
+    setTimeout(function () {
+      window.location.href = apiUrl;
+    }, 1500);
+  } else {
+    // 电脑直接打开 WhatsApp Web
+    window.open(webUrl, "_blank");
+  }
 }
 </script>
 </body>
